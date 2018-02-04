@@ -1,5 +1,6 @@
 language: cpp
 before_script:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update -qq
   - sudo apt-get install -y g++-5
   - sudo rm -f /usr/bin/gcc
