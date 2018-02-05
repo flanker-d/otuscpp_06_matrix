@@ -7,14 +7,14 @@
 #include "matrix.h"
 #include "value.h"
 
-template<typename T>
+template<typename T, int default_value>
 class matrix;
 
-template<typename T>
+template<typename T, int default_value>
 class row
 {
   public:
-    value<T>& operator[](int col)
+    value<T, default_value>& operator[](int col)
     {
       coord_t coord = std::make_tuple(m_row, col);
       auto found = m_matrix.get_points().find(coord);
@@ -29,14 +29,15 @@ class row
         return m_new_cell;
       }
     }
-    row(matrix<T> &matrix_, int row_) :
-      m_matrix(matrix_),
-      m_row(row_)
+    row(matrix<T, default_value> &matrix_, int row_)
+      : m_matrix(matrix_)
+      , m_row(row_)
+      , m_new_cell(value<T, default_value>(m_matrix, default_value))
     {
     }
   private:
-    matrix<T>& m_matrix;
+    matrix<T, default_value>& m_matrix;
     int m_row;
-    value<T> m_new_cell = value<T>(m_matrix);
+    value<T, default_value> m_new_cell;// = value<T, default_value>(m_matrix, -1);
 };
 

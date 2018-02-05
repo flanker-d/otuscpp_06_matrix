@@ -9,20 +9,20 @@
 
 using coord_t = std::tuple<int, int>;
 
-template<typename T>
+template<typename T, int default_value>
 class row;
 
-template<typename T>
+template<typename T, int default_value>
 class matrix
 {
-    using iterator = typename std::map<coord_t, value<T>>::iterator;
+    using iterator = typename std::map<coord_t, value<T, default_value>>::iterator;
 
   public:
-    row<T> operator[](int row_)
+    row<T, default_value> operator[](int row_)
     {
-      return row<T>(*this, row_);
+      return row<T, default_value>(*this, row_);
     }
-    std::map<coord_t, value<T>> &get_points()
+    std::map<coord_t, value<T, default_value>> &get_points()
     {
       return m_points;
     }
@@ -38,7 +38,7 @@ class matrix
     {
       return m_points.size();
     }
-    static std::tuple<int, int, int> make_tuple(std::pair<coord_t, value<T>> it)
+    static std::tuple<int, int, int> make_tuple(std::pair<coord_t, value<T, default_value>> it)
     {
       int x = std::get<0>(it.first);
       int y = std::get<1>(it.first);
@@ -48,5 +48,6 @@ class matrix
     }
 
   private:
-    std::map<coord_t, value<T>> m_points;
+    std::map<coord_t, value<T, default_value>> m_points;
+    int m_default_value = default_value;
 };

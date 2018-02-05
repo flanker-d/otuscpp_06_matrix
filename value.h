@@ -6,21 +6,16 @@
 
 using coord_t = std::tuple<int, int>;
 
-template<typename T>
+template<typename T, int default_value>
 class matrix;
 
-template<typename T>
+template<typename T, int default_value>
 class value
 {
   public:
-    value(matrix<T>& matrix_, int val_)
+    value(matrix<T, default_value>& matrix_, int val_)
       : m_matrix(matrix_)
       , m_value(val_)
-    {
-    }
-    value(matrix<T>& matrix_)
-      : m_matrix(matrix_)
-      , m_value(-1)
     {
     }
     void set_row_col(int row_, int col_)
@@ -31,7 +26,7 @@ class value
     void operator=(const int& val)
     {
       coord_t coord = std::make_tuple(m_row, m_col);
-      if(val == -1)
+      if(val == default_value)
       {
         auto it = m_matrix.get_points().find(coord);
         if(it != m_matrix.get_points().end())
@@ -40,24 +35,28 @@ class value
       else
         m_matrix.get_points().insert(std::make_pair(coord, value(m_matrix, val)));
     }
-
-    friend std::ostream& operator<<(std::ostream& os, const value<T>& obj)
+    friend bool operator==(value<T, default_value>& lhs, const T& rhs)
     {
-      if(obj.m_value == -1)
-        os << "0";
+      return lhs.get_value() == rhs;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const value<T, default_value>& obj)
+    {
+      if(obj.m_value == default_value)
+        os << default_value;
       else
         os << obj.m_value;
       return os;
     }
 
-    int get_value()
+    T get_value()
     {
       return m_value;
     }
 
   private:
-    matrix<T>& m_matrix;
-    T m_value = -1;
+    matrix<T, default_value>& m_matrix;
+    T m_value = default_value;
     int m_row;
     int m_col;
 };
