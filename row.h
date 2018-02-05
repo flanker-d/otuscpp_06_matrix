@@ -25,8 +25,8 @@ class row
       }
       else
       {
-        m_default_value.set_row_col(m_row, col);
-        return m_default_value;
+        m_new_cell.set_row_col(m_row, col);
+        return m_new_cell;
       }
     }
     row(matrix<T> &matrix_, int row_) :
@@ -37,6 +37,6 @@ class row
   private:
     matrix<T>& m_matrix;
     int m_row;
-    value<T> m_default_value = value<T>(m_matrix);
+    value<T> m_new_cell = value<T>(m_matrix);
 };
 
