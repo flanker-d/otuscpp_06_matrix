@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  CMatrix matr;
+  matrix matr;
   const int SIZE = 10;
   for(int i = 0; i < SIZE; i++)
   {

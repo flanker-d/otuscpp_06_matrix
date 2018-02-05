@@ -6,7 +6,7 @@ include_directories (${PROJECT_SOURCE_DIR})
 
 configure_file(version.h.in version.h)
 
-add_executable(matrix matrix.cpp main.cpp)
+add_executable(matrix matrix.cpp row.cpp value.cpp main.cpp)
 
 set_target_properties(matrix PROPERTIES
   CXX_STANDARD 14
