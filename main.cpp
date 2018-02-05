@@ -13,7 +13,7 @@ int main()
   matrix<type_t, default_value> matr;
   assert(matr.size() == 0);
 
-  value<type_t, default_value> a = matr[0][0];
+  auto a = matr[0][0];
   assert(a == default_value);
   assert(matr.size() == 0);
 
