@@ -17,6 +17,6 @@ class row
   private:
     matrix& m_matrix;
     int m_row;
-    value m_default_value = value(&m_matrix);
+    value m_default_value = value(m_matrix);
 };
 
