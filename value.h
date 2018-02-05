@@ -15,6 +15,8 @@ class value
     void set_row_col(int row_, int col_);
     void operator=(const int& val);
     friend std::ostream& operator<<(std::ostream& os, const value& obj);
+    int get_value();
+
   private:
     matrix* m_matrix;
     int m_value = -1;

@@ -37,5 +37,16 @@ int main()
     std::cout << std::endl;
   }
 
+  std::cout << matr.size() << std::endl;
+
+  for(auto c : matr)
+  {
+    int x;
+    int y;
+    int v;
+    std::tie(x, y, v) = matrix::make_tuple(c);
+    std::cout << x << " " << y << " " << v << std::endl;
+  }
+
   return 0;
 }

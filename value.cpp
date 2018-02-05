@@ -32,6 +32,11 @@ void value::operator=(const int& val)
     m_matrix->get_points().insert(std::make_pair(coord, value(m_matrix, val)));
 }
 
+int value::get_value()
+{
+  return m_value;
+}
+
 std::ostream& operator<<(std::ostream& os, const value& obj)
 {
   if(obj.m_value == -1)
