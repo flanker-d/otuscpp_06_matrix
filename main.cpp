@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  matrix matr;
+  matrix<int> matr;
   const int SIZE = 10;
   for(int i = 0; i < SIZE; i++)
   {
@@ -44,7 +44,7 @@ int main()
     int x;
     int y;
     int v;
-    std::tie(x, y, v) = matrix::make_tuple(c);
+    std::tie(x, y, v) = matrix<int>::make_tuple(c);
     std::cout << x << " " << y << " " << v << std::endl;
   }
 

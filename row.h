@@ -7,16 +7,36 @@
 #include "matrix.h"
 #include "value.h"
 
+template<typename T>
 class matrix;
 
+template<typename T>
 class row
 {
   public:
-    value& operator[](int col);
-    row(matrix &matrix_, int row_);
+    value<T>& operator[](int col)
+    {
+      coord_t coord = std::make_tuple(m_row, col);
+      auto found = m_matrix.get_points().find(coord);
+      if(found != m_matrix.get_points().end())
+      {
+        found->second.set_row_col(m_row, col);
+        return found->second;
+      }
+      else
+      {
+        m_default_value.set_row_col(m_row, col);
+        return m_default_value;
+      }
+    }
+    row(matrix<T> &matrix_, int row_) :
+      m_matrix(matrix_),
+      m_row(row_)
+    {
+    }
   private:
-    matrix& m_matrix;
+    matrix<T>& m_matrix;
     int m_row;
-    value m_default_value = value(m_matrix);
+    value<T> m_default_value = value<T>(m_matrix);
 };
 
